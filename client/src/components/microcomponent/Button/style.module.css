@@ -1,0 +1,3 @@
+.button{
+    @apply border-none  p-2 bg-gray-300
+}

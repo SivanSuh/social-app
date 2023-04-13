@@ -1,0 +1,15 @@
+.card {
+    @apply  w-[612px] border-2 h-[650px] mx-auto
+}
+.imageContainer{
+    @apply h-[520px]
+}
+.flexStructure  {
+    @apply flex items-center
+}
+.icon {
+    @apply p-4 rounded-full border-2 m-3
+}
+.command{
+    @apply flex-1
+}
