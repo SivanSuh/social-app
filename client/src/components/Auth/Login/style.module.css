@@ -1,0 +1,9 @@
+.login {
+    @apply max-w-xl w-full mx-auto
+}
+.title {
+    @apply text-center text-2xl my-5
+}
+.register{
+    @apply text-right my-2 text-blue-600 font-bold
+}

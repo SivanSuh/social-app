@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../microcomponent/Input/input";
 import Button from "../microcomponent/Button";
+import Link from "next/link";
 
 const Navbar = () => {
   const [values, setValues] = useState("");
@@ -13,7 +14,9 @@ const Navbar = () => {
           value={values}
           onChange={(e) => setValues(e.target.value)}
         />
-        <Button buttonName="Giriş Yap" />
+        <Link href="/auth/login">
+          <Button buttonName="Giriş Yap" />
+        </Link>
       </div>
     </div>
   );

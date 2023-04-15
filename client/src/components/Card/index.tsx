@@ -2,18 +2,21 @@ import React from "react";
 import Style from "./style.module.css";
 import Input from "../microcomponent/Input/input";
 import Button from "../microcomponent/Button";
+import { BiDotsVertical } from "react-icons/bi";
+import { GiRamProfile } from "react-icons/gi";
 
 const Card = () => {
   return (
     <div className={Style.card}>
       <div
         className={Style.flexStructure}
-        style={{ justifyContent: "space-between", margin: "5px", flex: 1 }}
+        style={{ justifyContent: "space-between" }}
       >
         <div className={Style.flexStructure}>
           <div className={Style.icon} />
           <span>Title</span>
         </div>
+        <BiDotsVertical size={25} />
       </div>
       <div className={Style.imageContainer}>
         <img
@@ -22,9 +25,13 @@ const Card = () => {
           className="h-full object-cover w-full"
         />
       </div>
+      <div className={Style.flexStructure}>
+        <GiRamProfile size={20} />
+        <p className="mx-2">yorum</p>
+      </div>
       <div
         className={Style.flexStructure}
-        style={{ justifyContent: "space-between", margin: "5px", flex: 1 }}
+        style={{ justifyContent: "space-between", margin: "5px" }}
       >
         <div className={Style.command}>
           <Input placeholder="Commands" />

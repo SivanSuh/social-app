@@ -1,0 +1,12 @@
+.container{
+    @apply max-w-xl w-full mx-auto
+}
+.register {
+    @apply flex flex-col gap-5 
+}
+.title{
+    @apply my-5 text-center text-2xl
+}
+.subTitle{
+    @apply text-right my-2 text-blue-600
+}

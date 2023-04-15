@@ -1,8 +1,8 @@
 .card {
-    @apply  w-[612px] border-2 h-[650px] mx-auto
+    @apply  w-[612px] border-2 h-[650px] mx-auto flex flex-col justify-between
 }
 .imageContainer{
-    @apply h-[520px]
+    @apply flex-1
 }
 .flexStructure  {
     @apply flex items-center
