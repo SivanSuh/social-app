@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Style from "./style.module.css";
 import Input from "../microcomponent/Input/input";
 import Button from "../microcomponent/Button";
 import { BiDotsVertical } from "react-icons/bi";
 import { GiRamProfile } from "react-icons/gi";
+import Modal from "../Modal";
 
 const Card = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className={Style.card}>
       <div
@@ -16,7 +18,7 @@ const Card = () => {
           <div className={Style.icon} />
           <span>Title</span>
         </div>
-        <BiDotsVertical size={25} />
+        <BiDotsVertical size={25} onClick={() => setOpen(true)} />
       </div>
       <div className={Style.imageContainer}>
         <img
@@ -38,6 +40,9 @@ const Card = () => {
         </div>
         <Button buttonName="Gonder" />
       </div>
+      <Modal open={open} close={setOpen}>
+        <h3>nadbad</h3>
+      </Modal>
     </div>
   );
 };
