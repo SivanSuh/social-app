@@ -6,9 +6,11 @@ import Link from "next/link";
 const Navbar = () => {
   const [values, setValues] = useState("");
   return (
-    <div className="bg-black">
+    <div className="bg-black sticky top-0">
       <div className="max-w-7xl mx-auto text-white p-4 flex justify-between items-center">
-        <h2>LOGO</h2>
+        <Link href="/">
+          <h2>LOGO</h2>
+        </Link>
         <Input
           placeholder="Bir şeyler yaz"
           value={values}

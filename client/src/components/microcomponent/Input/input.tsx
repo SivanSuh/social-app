@@ -6,6 +6,7 @@ interface InputProps {
   value?: any;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: "text" | "file";
+  name?: string | any;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -13,12 +14,14 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   type,
+  name,
 }) => {
   return (
     <input
       className={Style.input}
       value={value}
       type={type}
+      name={name}
       onChange={onChange}
       placeholder={placeholder}
     />
