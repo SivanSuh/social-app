@@ -2,27 +2,38 @@ import React, { useState } from "react";
 import Style from "./style.module.css";
 import Input from "../microcomponent/Input/input";
 import Button from "../microcomponent/Button";
-import { onAdd } from "@/store/slices/newCardSlice";
-import { useDispatch } from "react-redux";
+import { onAdd, postCard } from "@/store/slices/newCardSlice";
+import { useAppDispatch } from "@/store";
 
 const NewCard = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [values, setValues] = useState({
     title: "",
-    commant: "",
+    command: "",
+    file: "",
   });
 
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  // const handleFileUpload = (e: any) => {
+  //   setValues({ ...values, file: e.target.files[0] });
+  // };
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(onAdd([values]));
+    if (values.title.trim() === "" || values.command.trim() === "") {
+      return;
+    }
+    // dispatch(onAdd(values as any));
+    dispatch(postCard(values));
+    setValues({
+      title: "",
+      command: "",
+      file: "",
+    });
   };
   return (
     <form onSubmit={handleClick} className={Style.form}>
@@ -32,10 +43,15 @@ const NewCard = () => {
         onChange={onChangeValue}
         placeholder="title"
       />
-      <Input placeholder="foto" type="file" />
       <Input
-        name="commant"
-        value={values.commant}
+        placeholder="foto"
+        name="file"
+        value={values.file}
+        onChange={onChangeValue}
+      />
+      <Input
+        name="command"
+        value={values.command}
         onChange={onChangeValue}
         placeholder="command"
       />

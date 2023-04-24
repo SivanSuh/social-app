@@ -1,13 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import newCardSlice from "./slices/newCardSlice";
+import userSlice from "./slices/auth/userSlice";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
     reducer:{
-        newCard: newCardSlice
+        newCard: newCardSlice,
+        user:userSlice
     }
 })
 
 
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export const useAppDispatch: () => typeof store.dispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -1,5 +1,5 @@
 .card {
-    @apply  w-[612px] border-2 h-[650px] mx-auto flex flex-col justify-between
+    @apply  w-[612px] border-2 h-[700px] mx-auto flex flex-col justify-between my-5
 }
 .imageContainer{
     @apply flex-1
