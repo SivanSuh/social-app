@@ -13,12 +13,15 @@ export const getCard = createAsyncThunk("getAllCard", async () => {
     return  data
 })
 export const postCard = createAsyncThunk("postCard", async (post:Object) => {
-    try {
+    
         const res  = await axios.post("http://localhost:8000/card/create-card",post)
         return  res.data
-    } catch (error) {
-        console.log(error)
-    }
+  
+})
+export const deleteCard = createAsyncThunk("delete-card",async (cardId:string ) => {
+   
+         await axios.delete(`http://localhost:8000/card/delete-card/${cardId}`)
+        return cardId
 })
 const initialState:NewCardProps = {
     content:[],
@@ -31,7 +34,9 @@ const newCardSlice = createSlice({
     reducers:{
         onAdd:(state,action:PayloadAction<NewCardProps>) => {
              state.content.push(action.payload);
-          
+        },
+        onDelete:(state,action) => {
+           state.content = state.content.filter((item) => item._id !== action.payload._id)
         }
     },
     extraReducers(builder) {
@@ -49,8 +54,20 @@ const newCardSlice = createSlice({
         builder.addCase(postCard.rejected,(state) => {
             state.error = true
         })
+
+        // delete 
+        builder.addCase(deleteCard.fulfilled,(state,action) => {
+            const id = action.payload;
+          
+               state.content = state.content.filter((items) => items.id !== id)
+                console.log("delete items thunk", action.payload)
+            
+        })
+        builder.addCase(deleteCard.rejected, (state,action) => {
+            state.error = true
+        })
     },
 })
 
-export const  { onAdd} = newCardSlice.actions
+export const  { onAdd, onDelete} = newCardSlice.actions
 export default newCardSlice.reducer

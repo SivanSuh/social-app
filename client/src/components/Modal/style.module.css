@@ -2,7 +2,7 @@
     @apply   fixed h-full  w-full top-0 left-0 bottom-0 bg-[#C8C8C8] bg-opacity-25 ;
 }
 .container {
-@apply text-center fixed top-1/4  bg-white max-w-xl w-full right-2/4 h-[500px] translate-x-2/4 
+@apply text-center fixed top-1/4  bg-white max-w-xl w-full right-2/4 h-[300px] translate-x-2/4 
 }
 
 .close {

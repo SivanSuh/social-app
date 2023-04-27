@@ -4,9 +4,21 @@ import Input from "../microcomponent/Input/input";
 import Button from "../microcomponent/Button";
 import { onAdd, postCard } from "@/store/slices/newCardSlice";
 import { useAppDispatch } from "@/store";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+interface Forms {
+  example: string;
+  exampleRequired: string;
+}
 
 const NewCard = () => {
   const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Forms>();
 
   const [values, setValues] = useState({
     title: "",
@@ -27,7 +39,8 @@ const NewCard = () => {
     if (values.title.trim() === "" || values.command.trim() === "") {
       return;
     }
-    // dispatch(onAdd(values as any));
+
+    dispatch(onAdd(values as any));
     dispatch(postCard(values));
     setValues({
       title: "",
@@ -44,11 +57,13 @@ const NewCard = () => {
         placeholder="title"
       />
       <Input
-        placeholder="foto"
+        placeholder="foto image url"
         name="file"
+        type="text"
         value={values.file}
         onChange={onChangeValue}
       />
+
       <Input
         name="command"
         value={values.command}
