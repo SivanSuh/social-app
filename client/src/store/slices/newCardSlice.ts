@@ -1,27 +1,32 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_CARD;
+
 export interface NewCardProps {
 content:any[],
 isLoading:false,
 error:boolean
 }
 
+
 export const getCard = createAsyncThunk("getAllCard", async () => {
-    const res = await axios("http://localhost:8000/card/all-card")
+    const res = await axios.get(`http://localhost:8000/card/all-card`)
     const data = await res.data
     return  data
 })
 export const postCard = createAsyncThunk("postCard", async (post:Object) => {
     
-        const res  = await axios.post("http://localhost:8000/card/create-card",post)
+        const res  = await axios.post(`http://localhost:8000/card/create-card`,post)
         return  res.data
   
 })
 export const deleteCard = createAsyncThunk("delete-card",async (cardId:string ) => {
    
-         await axios.delete(`http://localhost:8000/card/delete-card/${cardId}`)
-        return cardId
+      const res =  await  axios.delete(`http://localhost:8000/card/delete-card/`,{
+            data: {cardId}
+         })
+        return res
 })
 const initialState:NewCardProps = {
     content:[],

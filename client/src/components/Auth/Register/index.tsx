@@ -1,28 +1,30 @@
 import Input from "@/components/microcomponent/Input/input";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { useState } from "react";
 import Style from "./style.module.css";
 import Button from "@/components/microcomponent/Button";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { useAppDispatch } from "@/store";
+import { loginAuth } from "@/store/slices/auth/userSlice";
 
 const Register = () => {
-  const [userInfo, setUserInfo] = useState({
+  const INITIAL_STATE = {
     userName: "",
     email: "",
     password: "",
     confirmPassword: "",
-  });
+  };
+  const [userInfo, setUserInfo] = useState(INITIAL_STATE);
+
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
-  const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
-  console.log("user", user);
+  const dispatch = useAppDispatch();
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await dispatch(loginAuth(userInfo));
     console.log("users ", userInfo);
+    console.log("///////////////");
   };
 
   return (
@@ -44,6 +46,7 @@ const Register = () => {
           name="email"
           placeholder="email"
         />
+        {/* <Input placeholder="foto" type="file" /> */}
         <Input
           onChange={onChangeValue}
           name="password"

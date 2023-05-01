@@ -3,21 +3,27 @@ import axios from "axios";
 
 
 interface UserProps {
-    userName:string,
-    email:string,
-    password:string,
+    formContent: Object;
+    isLoggin : boolean
 }
 
-export const register = createAsyncThunk("user/register", async () => {
-    const response = await axios("http://localhost:8000/users/signup")
+export const registerAuth = createAsyncThunk("user/register", async (values:Object) => {
+    const response = await axios.post("http://localhost:8000/users/login", { data:values})
     const data = await response.data
+    console.log("oject ", values)
     return data
 
 })
+
+export const loginAuth = createAsyncThunk("user/new-login", async (userInfo: Object) => {
+    const response = await axios.post("http://localhost:8000/users/signup", userInfo)
+    const data = await response.data
+    console.log("login new register ", userInfo)
+    return data
+})
 const initialState:UserProps = {
-    userName:"",
-    email:"",
-    password:"",
+    formContent:{},
+    isLoggin:false
 }
 
 const userSlice = createSlice({
@@ -25,8 +31,26 @@ const userSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers(builder) {
-        builder.addCase(register.fulfilled, (state,action) => {
-            
+        builder.addCase(registerAuth.pending,(state,action) => {
+            state.isLoggin = false
+        })
+        builder.addCase(registerAuth.fulfilled, (state,action) => {
+            state.formContent = action.payload
+            state.isLoggin = true
+            console.log("action.payload",action.payload)
+        })
+        builder.addCase(registerAuth.rejected, (state,action) => {
+            state.isLoggin = false
+        })
+
+        // register
+        builder.addCase(loginAuth.pending, (state,action) => {
+            state.isLoggin = false
+        })
+        builder.addCase(loginAuth.fulfilled,  (state,action) => {
+            state.formContent = action.payload
+            localStorage.setItem("user_ınfo",JSON.stringify(action.payload))
+            console.log("action payload login", action.payload)
         })
     },
 })

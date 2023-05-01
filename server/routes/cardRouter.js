@@ -13,5 +13,5 @@ router.get("/all-card", getAllCard);
 router.post("/create-card", addCard);
 router.put("/update-card", updateCard);
 
-router.delete("/delete-card/:id", deleteCard);
+router.delete("/delete-card", deleteCard);
 module.exports = router;
