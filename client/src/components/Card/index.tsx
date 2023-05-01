@@ -32,7 +32,7 @@ const Card = () => {
   };
   return (
     <>
-      {content.map((item, index) => (
+      {content?.map((item, index) => (
         <div className={Style.card} key={item._id}>
           <div
             className={Style.flexStructure}

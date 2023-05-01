@@ -56,4 +56,23 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (user) {
+      bcrypt.compare(password, user.password, (err, same) => {
+        if (same) {
+          res.status(200).send(" You are i loıggin");
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+});
+
 module.exports = router;
