@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = process.env.NEXT_PUBLIC_USER;
 
 interface UserProps {
     formContent: Object;
@@ -8,7 +9,7 @@ interface UserProps {
 }
 
 export const registerAuth = createAsyncThunk("user/register", async (values:Object) => {
-    const response = await axios.post("http://localhost:8000/users/login", { data:values})
+    const response = await axios.post(`${BASE_URL}/login`, { data:values})
     const data = await response.data
     console.log("oject ", values)
     return data
@@ -16,7 +17,7 @@ export const registerAuth = createAsyncThunk("user/register", async (values:Obje
 })
 
 export const loginAuth = createAsyncThunk("user/new-login", async (userInfo: Object) => {
-    const response = await axios.post("http://localhost:8000/users/signup", userInfo)
+    const response = await axios.post(`${BASE_URL}/signup`, userInfo)
     const data = await response.data
     console.log("login new register ", userInfo)
     return data

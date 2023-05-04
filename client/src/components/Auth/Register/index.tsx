@@ -25,6 +25,7 @@ const Register = () => {
     await dispatch(loginAuth(userInfo));
     console.log("users ", userInfo);
     console.log("///////////////");
+    setUserInfo(INITIAL_STATE);
   };
 
   return (
