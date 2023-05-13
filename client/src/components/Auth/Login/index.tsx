@@ -1,32 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "@/components/microcomponent/Input/input";
 import Style from "./style.module.css";
 import Button from "@/components/microcomponent/Button";
 import Link from "next/link";
-import { useAppDispatch } from "@/store";
-import { registerAuth } from "@/store/slices/auth/userSlice";
+import { RootState, useAppDispatch } from "@/store";
+import { loginAuth } from "@/store/slices/auth/userSlice";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [values, setValues] = useState({
-    userName: "",
+    email: "",
     password: "",
   });
+  const { isLoggin } = useSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await dispatch(loginAuth(values));
     console.log("values register", values);
-    dispatch(registerAuth(values));
     setValues({
-      userName: "",
+      email: "",
       password: "",
     });
+    console.log("is Loggin", isLoggin);
+    setTimeout(() => {
+      if (isLoggin) {
+        router.push("/");
+      }
+    }, 1000);
   };
+
   return (
     <div className={Style.login}>
       <h2 className={Style.title}>Login Page</h2>
@@ -35,9 +48,9 @@ const Login = () => {
       </Link>
       <form onSubmit={onSubmit} className="flex flex-col gap-5">
         <Input
-          value={values.userName}
-          name="userName"
-          placeholder="user name"
+          value={values.email}
+          name="email"
+          placeholder="Email"
           onChange={changeHandler}
         />
         <Input
@@ -46,7 +59,7 @@ const Login = () => {
           name="password"
           placeholder="password"
         />
-        <Button buttonName="Gonder" />
+        <Button type="submit" buttonName="Gonder" />
       </form>
     </div>
   );

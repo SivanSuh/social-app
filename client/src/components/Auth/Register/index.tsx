@@ -4,7 +4,7 @@ import Style from "./style.module.css";
 import Button from "@/components/microcomponent/Button";
 import Link from "next/link";
 import { useAppDispatch } from "@/store";
-import { loginAuth } from "@/store/slices/auth/userSlice";
+import { registerAuth } from "@/store/slices/auth/userSlice";
 
 const Register = () => {
   const INITIAL_STATE = {
@@ -22,7 +22,7 @@ const Register = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await dispatch(loginAuth(userInfo));
+    await dispatch(registerAuth(userInfo));
     console.log("users ", userInfo);
 
     setUserInfo(INITIAL_STATE);
