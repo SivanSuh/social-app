@@ -8,6 +8,7 @@ import { RootState } from "@/store";
 import { deleteCard, getCard, onDelete } from "@/store/slices/newCardSlice";
 import { useAppDispatch } from "@/store";
 import Button from "../microcomponent/Button";
+import Link from "next/link";
 
 const Card = () => {
   const [open, setOpen] = useState(false);
@@ -38,17 +39,19 @@ const Card = () => {
             className={Style.flexStructure}
             style={{ justifyContent: "space-between" }}
           >
-            <div className={Style.flexStructure}>
-              <div className={Style.icon} />
-              <span>{item?.title}</span>
-            </div>
+            <Link href={"/profile"}>
+              <div className={Style.flexStructure}>
+                <div className={Style.icon}>ŞS</div>
+                <span>{item?.title}</span>
+              </div>
+            </Link>
             <BiDotsVertical size={25} onClick={() => handleModal(item)} />
           </div>
           <div className={Style.imageContainer}>
             <img
               src={item?.file}
               alt="image"
-              className=" object-cover w-full h-[600px]"
+              className=" object-cover w-full h-[550px]"
             />
           </div>
           <div className={Style.flexStructure} style={{ padding: "5px" }}>

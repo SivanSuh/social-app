@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import Input from "../microcomponent/Input/input";
 import Button from "../microcomponent/Button";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const Navbar = () => {
   const [values, setValues] = useState("");
-  useEffect(() => {
-    const localeValues = localStorage.getItem("user_ınfo");
-    const local = JSON.parse(localeValues as string);
-    console.log(local);
-  }, []);
+
+  const { formContent } = useSelector((state: RootState) => state.user);
 
   return (
     <div className="border-b-2 bg-white sticky top-0">
@@ -22,9 +21,15 @@ const Navbar = () => {
           value={values}
           onChange={(e) => setValues(e.target.value)}
         />
-        <Link href="/auth/login">
-          <Button buttonName="Giriş Yap" />
-        </Link>
+        <div>
+          {formContent ? (
+            <span>{formContent.email}</span>
+          ) : (
+            <Link href="/auth/login">
+              <Button buttonName="Giriş Yap" />
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

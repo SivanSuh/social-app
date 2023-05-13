@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
     if (user) {
       bcrypt.compare(password, user.password, (err, same) => {
         if (same) {
-          res.status(200).send(" You are i loıggin");
+          res.status(200).send({ email });
         }
       });
     }
