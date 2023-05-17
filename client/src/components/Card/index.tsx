@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { deleteCard, getCard, onDelete } from "@/store/slices/newCardSlice";
 import { useAppDispatch } from "@/store";
-import Button from "../microcomponent/Button";
-import Link from "next/link";
 
 const Card = () => {
   const [open, setOpen] = useState(false);
@@ -39,12 +37,11 @@ const Card = () => {
             className={Style.flexStructure}
             style={{ justifyContent: "space-between" }}
           >
-            <Link href={"/profile"}>
-              <div className={Style.flexStructure}>
-                <div className={Style.icon}>ŞS</div>
-                <span>{item?.title}</span>
-              </div>
-            </Link>
+            <div className={Style.flexStructure}>
+              <div className={Style.icon}>ŞS</div>
+              <span>{item?.title}</span>
+            </div>
+
             <BiDotsVertical size={25} onClick={() => handleModal(item)} />
           </div>
           <div className={Style.imageContainer}>
