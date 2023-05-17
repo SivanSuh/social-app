@@ -4,7 +4,7 @@ import axios from "axios";
 const BASE_URL = process.env.NEXT_PUBLIC_USER;
 
 interface UserProps {
-    formContent: Object;
+    formContent: Object | any;
     isLoggin : boolean;
     isError:boolean;
 }
@@ -28,9 +28,7 @@ export const registerAuth = createAsyncThunk("user/new-login", async (userInfo: 
     return data
 })
 const initialState:UserProps = {
-    formContent:{
-        
-    },
+    formContent:{},
     isLoggin:false,
     isError:false
 }
@@ -38,7 +36,12 @@ const initialState:UserProps = {
 const userSlice = createSlice({
     name:"user",
     initialState,
-    reducers:{},
+    reducers:{
+        logout:() => {
+            localStorage.removeItem("persist:root");
+            
+        }
+    },
     extraReducers(builder) {
         builder.addCase(registerAuth.pending,(state,action) => {
             state.isLoggin = false
@@ -68,5 +71,5 @@ const userSlice = createSlice({
     },
 })
 
-
+export const { logout } = userSlice.actions
 export default userSlice.reducer

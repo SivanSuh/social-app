@@ -1,15 +1,19 @@
 import React from "react";
 import Style from "./style.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const Profile = () => {
+  const { formContent } = useSelector((state: RootState) => state.user);
   return (
     <div className={Style.container}>
       <div>
         <div className={Style.icons}>ŞS</div>
-        <div>İsim</div>
+        <p>{formContent.userName}</p>
+        <div>{formContent.email}</div>
       </div>
       <div>
-        <p>Paylaşılanlar</p>
+        <p>Detaylar</p>
       </div>
     </div>
   );
