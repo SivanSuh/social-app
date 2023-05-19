@@ -23,8 +23,6 @@ const Register = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(registerAuth(userInfo));
-    console.log("users ", userInfo);
-
     setUserInfo(INITIAL_STATE);
   };
 

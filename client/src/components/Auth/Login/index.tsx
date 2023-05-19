@@ -27,12 +27,10 @@ const Login = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(loginAuth(values));
-    console.log("values register", values);
     setValues({
       email: "",
       password: "",
     });
-    console.log("is Loggin", isLoggin);
     setTimeout(() => {
       if (isLoggin) {
         router.push("/");

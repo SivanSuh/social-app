@@ -17,14 +17,12 @@ const Card = () => {
   useEffect(() => {
     dispatch(getCard());
   }, [dispatch]);
-  console.log("new Area", content);
 
   const handleModal = (pop: any) => {
     setOpen(true);
     setModalContent([pop as never]);
   };
   const deleteCardItem = (id: string) => {
-    console.log("delete", id);
     dispatch(onDelete(id));
     dispatch(deleteCard(id));
     setOpen(false);

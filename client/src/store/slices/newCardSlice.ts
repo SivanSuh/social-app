@@ -62,10 +62,7 @@ const newCardSlice = createSlice({
         // delete 
         builder.addCase(deleteCard.fulfilled,(state,action) => {
             const id = action.payload;
-          
-               state.content = state.content.filter((items) => items.id !== id)
-                console.log("delete items thunk", action.payload)
-            
+               state.content = state.content.filter((items) => items.id !== id)            
         })
         builder.addCase(deleteCard.rejected, (state,action) => {
             state.error = true
