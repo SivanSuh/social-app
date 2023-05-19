@@ -4,7 +4,6 @@ import Input from "../microcomponent/Input/input";
 import Button from "../microcomponent/Button";
 import { onAdd, postCard } from "@/store/slices/newCardSlice";
 import { useAppDispatch } from "@/store";
-import { useForm, SubmitHandler } from "react-hook-form";
 
 interface Forms {
   example: string;
@@ -13,13 +12,6 @@ interface Forms {
 
 const NewCard = () => {
   const dispatch = useAppDispatch();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Forms>();
-
   const [values, setValues] = useState({
     title: "",
     command: "",

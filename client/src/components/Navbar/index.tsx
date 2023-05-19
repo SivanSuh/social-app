@@ -12,7 +12,6 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
 
   const { formContent } = useSelector((state: RootState) => state.user);
-  console.log("form content", formContent);
 
   return (
     <div className="border-b-2 bg-white sticky top-0">
